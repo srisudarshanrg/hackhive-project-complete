@@ -1,0 +1,17 @@
+{{template "logup" .}}
+
+{{define "content"}}
+    <form method="post" id="confirm-otp-form">
+        <div class="mb-3">
+            <label for="confirm_otp" class="form-label">Confirm OTP</label>
+            <input type="text" class="form-control" name="confirm_otp">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Send OTP</button>
+
+        <br>
+        <br>
+
+        <label class="text-danger">{{index .CustomErrors "otpError"}}
+    </form>
+{{end}}

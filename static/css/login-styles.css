@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+body {
+    background-color: rgb(26, 26, 26);
+    text-align: center;
+}
+
+div.row {
+    margin-top: 10%;
+    font-family: "Ubuntu", sans-serif;
+}
+
+.auth-form {
+    box-shadow: 5px 5px 15px #646464;
+    width: 100%;
+    padding: 2%;
+    margin: 0;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+@media (max-width: 321px) {
+    div.row {
+        margin-top: 40%;
+        margin-left: 2px;
+        margin-right: 2px;
+    }
+}
+
+@media (min-width: 375px) {
+    div.row {
+        margin-top: 30%;
+        margin-left: 2px;
+        margin-right: 2px;
+    }
+}
+
+@media (min-width: 768px) {
+    div.row {
+        margin-top: 18%;
+        margin-left: 2px;
+        margin-right: 2px;
+    }
+}
+
+@media (min-width: 1024px) {
+    div.row {
+        margin-top: 10%;
+        margin-left: 2px;
+        margin-right: 2px;
+    }
+}
+
+@media (min-width: 1024px) {
+    div.row {
+        font-size: 1.5rem;
+    }
+    
+    div.row input {
+        font-size: 1.5rem;
+    }
+
+    div.row button {
+        font-size: 1.5rem;
+    }
+}
+
+@media (min-width: 1161px) {
+    div.row {
+        margin-top: 8%;
+        margin-left: 2px;
+        margin-right: 2px;
+    }
+}
+
+@media (min-width: 2560px) {
+    div.row h2 {
+        font-size: 4rem;
+    }
+
+    div.row {
+        font-size: 3rem;
+    }
+    
+    div.row input {
+        font-size: 3rem;
+    }
+
+    div.row button {
+        font-size: 3rem;
+    }
+}

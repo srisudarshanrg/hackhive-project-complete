@@ -1,0 +1,9 @@
+create_table("resource_status") {
+    t.Column("id", "integer", {primary: true})
+    t.Column("country", "string")
+    t.Column("oil", "string")
+    t.Column("electricity", "string")
+    t.Column("coal", "string")
+    t.Column("natural_gas", "string")
+    t.Column("biofuel", "string")
+}

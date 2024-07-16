@@ -1,0 +1,38 @@
+{{template "standard" .}}
+
+{{define "content"}}
+    {{$res := index .Data "countryRow"}}
+
+    <form method="post">
+        <h3>Get resource consumption status of a country</h3>
+        <div class="mb-3">
+            <label for="country" class="form-label">Enter Desired Country:</label>
+            <input type="text" class="form-control" id="country" name="country" value="{{if $res}}{{$res.Country}}{{end}}">
+        </div>
+        <button type="submit" class="btn btn-primary">Enter</button>
+        <br>
+        <label class="text-danger">{{index .CustomErrors "noCountry"}}</label>
+    </form>
+    {{if $res}}
+        <table class="table table-striped">
+            <tr>
+                <td>Country</td>
+                <td>Oil</td>
+                <td>Electricity</td>
+                <td>Coal</td>
+                <td>Natural Gas</td>
+                <td>Biofuel</td>
+            </tr>
+            <tr>
+                <td>{{$res.Country}}</td>
+                <td>{{$res.Oil}}</td>
+                <td>{{$res.Electricity}}</td>
+                <td>{{$res.Coal}}</td>
+                <td>{{$res.NaturalGas}}</td>
+                <td>{{$res.Biofuel}}</td>
+            </tr>
+        </table>
+
+        <p>Data from <a href="https://worldpopulationreview.com/">WorldPopulationReview</a></p>
+    {{end}}
+{{end}}

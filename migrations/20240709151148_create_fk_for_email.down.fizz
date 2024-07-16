@@ -1,0 +1,1 @@
+drop_index("login_details", "login_details_email_idx")
