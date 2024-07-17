@@ -1,3 +1,7 @@
+/* body {
+    z-index: 10000;
+} */
+
 .ecoEarth {
     height: 60px;
     width: 60px;
@@ -68,7 +72,7 @@ p {
     right: 0;
     top: 0;
     bottom: 0;
-    z-index: -1;
+    z-index: -1000;
 }
 .btn {
     width: 100px;
@@ -105,5 +109,5 @@ ul {
     list-style-type: none;
 }
 li {
-    color: white;
+   color: white;
 }

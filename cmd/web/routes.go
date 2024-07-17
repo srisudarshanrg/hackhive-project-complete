@@ -11,14 +11,14 @@ import (
 func routes(app *config.AppConfig) http.Handler {
 	mux := chi.NewRouter()
 
-	mux.Get("/", handlers.Repo.Home)
+	mux.Get("/", handlers.Repo.Login)
+	mux.Post("/", handlers.Repo.PostLogin)
+
+	mux.Get("/home", handlers.Repo.Home)
 
 	mux.Get("/carboprint", handlers.Repo.CarboPrint)
 
 	mux.Get("/recycle-locator", handlers.Repo.RecycleLocator)
-
-	mux.Get("/login", handlers.Repo.Login)
-	mux.Post("/login", handlers.Repo.PostLogin)
 
 	mux.Get("/sign-up", handlers.Repo.SignUp)
 	mux.Post("/sign-up", handlers.Repo.PostSignUp)

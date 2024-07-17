@@ -10,7 +10,7 @@ import (
 	"github.com/srisudarshanrg/hackhive-project-competition/pkg/render"
 )
 
-const portNumber = ":7000"
+const portNumber = ":8000"
 
 var app config.AppConfig
 

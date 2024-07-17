@@ -12,6 +12,8 @@
         <br>
         <br>
 
-        <label class="text-danger">{{index .CustomErrors "otpError"}}
+        {{if index .CustomErrors "otpError"}}
+            <label class="text-danger">{{index .CustomErrors "otpError"}}</label>
+        {{end}}        
     </form>
 {{end}}

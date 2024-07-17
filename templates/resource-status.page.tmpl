@@ -1,19 +1,23 @@
 {{template "standard" .}}
 
+{{define "css"}} <link rel="stylesheet" href="../static/css/resource-status.css"> {{end}}
+
 {{define "content"}}
     {{$res := index .Data "countryRow"}}
 
     <form method="post">
-        <h3>Get resource consumption status of a country</h3>
-        <div class="mb-3">
+        <h3>Get Resource Consumption Status of a Country</h3>
+        <div class="mb-3 justify-content-center">
             <label for="country" class="form-label">Enter Desired Country:</label>
-            <input type="text" class="form-control" id="country" name="country" value="{{if $res}}{{$res.Country}}{{end}}">
+            <input type="text" class="form-control" id="country" name="country" value="{{if $res}}{{$res.Country}}{{end}}" placeholder="Enter desired country">
         </div>
         <button type="submit" class="btn btn-primary">Enter</button>
         <br>
+        <br>
         <label class="text-danger">{{index .CustomErrors "noCountry"}}</label>
-    </form>
-    {{if $res}}
+
+        {{if $res}}
+        <h3>Usage of Resources by {{$res.Country}}</h3>
         <table class="table table-striped">
             <tr>
                 <td>Country</td>
@@ -35,4 +39,7 @@
 
         <p>Data from <a href="https://worldpopulationreview.com/">WorldPopulationReview</a></p>
     {{end}}
+
+    </form>
+    
 {{end}}

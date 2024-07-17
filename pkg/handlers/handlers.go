@@ -110,7 +110,7 @@ func (a *HandlerAccess) PostLogin(w http.ResponseWriter, r *http.Request) {
 		check := GetPasswordFromHash(password_entered, hashed_password)
 
 		if check {
-			http.Redirect(w, r, "/", http.StatusSeeOther)
+			http.Redirect(w, r, "/home", http.StatusSeeOther)
 		} else {
 			errorString = "Username or Password incorrect"
 			errorMap["notFound"] = errorString
@@ -191,6 +191,19 @@ func (a *HandlerAccess) PostForgotPassword(w http.ResponseWriter, r *http.Reques
 
 	email := r.Form.Get("email")
 
+	if email == "" {
+		errorMap := map[string]string{}
+
+		errorMsg := "Enter valid email address to get OTP"
+		errorMap["emailRequired"] = errorMsg
+
+		render.RenderTemplate(w, r, "forgot-password.page.tmpl", &models.TemplateData{
+			CustomErrors: errorMap,
+		})
+
+		return
+	}
+
 	// Send email
 	from := "srisudarshanrg@gmail.com"
 	password := confidential.EmailPassword()
@@ -232,7 +245,7 @@ func (a *HandlerAccess) PostConfirmOTP(w http.ResponseWriter, r *http.Request) {
 	} else {
 		otpError := map[string]string{}
 
-		otpErrorString := "The OTP you have entered is incorrect please try again"
+		otpErrorString := "The OTP you have entered is incorrect. Please try again"
 		otpError["otpError"] = otpErrorString
 
 		render.RenderTemplate(w, r, "confirm-otp.page.tmpl", &models.TemplateData{
@@ -309,7 +322,7 @@ func (a *HandlerAccess) PostResourceStatus(w http.ResponseWriter, r *http.Reques
 	if affected == 0 {
 		errorMap := map[string]string{}
 
-		errorString := "No such country exists"
+		errorString := "No such country exists. Please enter an existing country."
 		errorMap["noCountry"] = errorString
 
 		render.RenderTemplate(w, r, "resource-status.page.tmpl", &models.TemplateData{

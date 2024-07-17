@@ -13,7 +13,7 @@
         <br>
         <br>
         <div id="carouselExampleIndicators" class="carousel slide">
-          <div class="carousel-indicators">
+          <div class="carousel-indicators" style="width: 5px;">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
@@ -52,7 +52,7 @@
               <div class="carousel-item">
                 <!-- Third Question-->
                 <label for="foodType">Choose one of the foodTypes from the drop-down</label>
-                <input id="foodType" list="foodTypes" name="foodType">
+                <input id="foodType" list="foodTypes">
                 <datalist id="foodTypes" name="foodTypes">
                   <option value="Vegetarian">
                   <option value="Lacto-Vegetarian">
@@ -166,9 +166,9 @@
       <br>
 
      </div>  
-    <video id="background-video" autoplay loop muted poster="../static/images/background-video.mp4">
+    {{/* <video id="background-video" autoplay loop muted poster="../static/images/background-video.mp4">
         <source src="../static/images/background-video.mp4" type="video/mp4">
-    </video>
+    </video> */}}
 {{end}}
   
 {{define "js"}} <script src="../static/js/cargoprint.js"></script> {{end}}

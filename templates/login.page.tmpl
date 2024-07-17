@@ -2,40 +2,34 @@
 
 {{define "title"}}Login{{end}}
 
-{{define "content"}}
-    <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-div">
-            <form action="" method="post" class="auth-form text-center">
-                <h2>Login Form</h2>
-                <br>
-                <div class="mb-3">
-                    <label for="username_entered" class="form-label">Enter Username, Email or Phone</label>
-                    <input type="text" class="form-control" id="username" name="username_entered" required placeholder="Enter username, email or phone">
-                </div>
-        
-                <div class="mb-3">
-                    <label for="password_entered" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password_entered" required placeholder="Enter password">
-                </div>
-                <label class="text-danger"></label> 
-                <a href="/signup">Or sign up</a>
-                <br>
-                <br>
-
-                <a href="/forgotpassword">Forgot Password?</a>
-
-                <br>
-                <br>
-
-                <label class="text-danger">{{index .CustomErrors "notFound"}}</label>
-
-                <br>
-                <br> 
-
-                <button type="submit" class="btn btn-primary">Submit</button>       
-            </form>
+{{define "content"}}    
+    <form action="" method="post" class="auth-form text-center">
+        <h2>Login</h2>
+        <br>
+        <div class="mb-3">
+            <label for="username_entered" class="form-label">Enter Username, Email or Phone</label>
+            <input type="text" class="form-control" id="username" name="username_entered" required placeholder="Enter username, email or phone">
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
-    </div>    
+
+        <div class="mb-3">
+            <label for="password_entered" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password_entered" required placeholder="Enter password">
+        </div>
+        <a href="/sign-up">Or Sign Up</a>
+        <br>
+        <br>
+
+        <a href="/forgot-password">Forgot Password?</a>
+
+        <br>
+        <br>    
+
+        {{if index .CustomErrors "notFound"}}
+            <label class="text-danger">{{index .CustomErrors "notFound"}}</label>
+            <br>
+            <br> 
+        {{end}}
+
+        <button type="submit" class="btn btn-primary">Submit</button>       
+    </form>  
 {{end}}
