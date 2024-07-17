@@ -367,6 +367,8 @@ func (a *HandlerAccess) PostResourceStatus(w http.ResponseWriter, r *http.Reques
 		Biofuel:     biofuel,
 	}
 
+	// CheckIfEmpty("Data Insufficient", specificCountry.Country, specificCountry.Oil, specificCountry.Electricity, specificCountry.Coal, specificCountry.NaturalGas, specificCountry.Biofuel)
+
 	data := map[string]interface{}{}
 	data["countryRow"] = specificCountry
 

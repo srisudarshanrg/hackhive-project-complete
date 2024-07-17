@@ -46,3 +46,11 @@ func SendEmail(from string, to []string, message []byte, password string) error 
 func SetOtp(otp_recieved string) {
 	otp = otp_recieved
 }
+
+// func CheckIfEmpty(replacement string, arguments ...string) {
+// 	for _, argument := range arguments {
+// 		if argument == "" {
+// 			argument = replacement
+// 		}
+// 	}
+// }
