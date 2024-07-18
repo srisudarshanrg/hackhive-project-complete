@@ -3,7 +3,9 @@ package main
 import (
 	"log"
 	"net/http"
+	"time"
 
+	"github.com/alexedwards/scs/v2"
 	"github.com/srisudarshanrg/hackhive-project-competition/pkg/config"
 	"github.com/srisudarshanrg/hackhive-project-competition/pkg/driver"
 	"github.com/srisudarshanrg/hackhive-project-competition/pkg/handlers"
@@ -13,6 +15,7 @@ import (
 const portNumber = ":8000"
 
 var app config.AppConfig
+var session *scs.SessionManager
 
 func main() {
 	templateCache, err := render.CreateTemplateCache()
@@ -20,7 +23,14 @@ func main() {
 		log.Println("Could not create template cache.")
 	}
 
+	session = scs.New()
+	session.Lifetime = 10 * time.Second
+	session.Cookie.Persist = true
+	session.Cookie.SameSite = http.SameSiteLaxMode
+	session.Cookie.Secure = false
+
 	app.TemplateCache = templateCache
+	app.Session = session
 
 	repo := handlers.SetAppConfigHandler(&app)
 	handlers.NewHandlers(repo)

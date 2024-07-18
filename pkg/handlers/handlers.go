@@ -42,7 +42,13 @@ func DatabaseAccess(database *sql.DB) {
 
 // Home is the handler for the home page
 func (a *HandlerAccess) Home(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, r, "home.page.tmpl", &models.TemplateData{})
+	ipAddr := a.App.Session.GetString(r.Context(), "ipAddr")
+
+	if ipAddr == "" {
+		http.Redirect(w, r, "/login", http.StatusSeeOther)
+	} else {
+		render.RenderTemplate(w, r, "home.page.tmpl", &models.TemplateData{})
+	}
 }
 
 // CarboPrint is the handler for the carboprint page
@@ -57,6 +63,9 @@ func (a *HandlerAccess) RecycleLocator(w http.ResponseWriter, r *http.Request) {
 
 // Login is the handler for login page
 func (a *HandlerAccess) Login(w http.ResponseWriter, r *http.Request) {
+	ipAddr := r.RemoteAddr
+	a.App.Session.Put(r.Context(), "ipAddr", ipAddr)
+
 	render.RenderTemplate(w, r, "login.page.tmpl", &models.TemplateData{
 		CustomErrors: nil,
 	})
@@ -110,7 +119,7 @@ func (a *HandlerAccess) PostLogin(w http.ResponseWriter, r *http.Request) {
 		check := GetPasswordFromHash(password_entered, hashed_password)
 
 		if check {
-			http.Redirect(w, r, "/home", http.StatusSeeOther)
+			http.Redirect(w, r, "/", http.StatusSeeOther)
 		} else {
 			errorString = "Username or Password incorrect"
 			errorMap["notFound"] = errorString

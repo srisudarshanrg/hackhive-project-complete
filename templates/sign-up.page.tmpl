@@ -4,6 +4,7 @@
 
 {{define "content"}}
     <form action="/signup" method="post" class="auth-form text-center">
+        <input type="hidden" name="csrf_token" value="{{index .CSRFToken}}">
         <h2>Sign-Up</h2>
         <br>
 

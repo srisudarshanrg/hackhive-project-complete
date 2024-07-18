@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 	"text/template"
 
+	"github.com/justinas/nosurf"
 	"github.com/srisudarshanrg/hackhive-project-competition/pkg/config"
 	"github.com/srisudarshanrg/hackhive-project-competition/pkg/models"
 )
@@ -19,9 +20,6 @@ func SetAppConfig(app *config.AppConfig) {
 func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, td *models.TemplateData) {
 	var templateCache map[string]*template.Template
 	var err error
-	if err != nil {
-		log.Println("Could not get template cache")
-	}
 
 	templateCache = a.TemplateCache
 
@@ -29,6 +27,10 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, td *mod
 	if !ok {
 		log.Println("Requested template could not be taken from template cache")
 	}
+
+	csrfToken := nosurf.Token(r)
+
+	td.CSRFToken = csrfToken
 
 	err = template.Execute(w, td)
 	if err != nil {
