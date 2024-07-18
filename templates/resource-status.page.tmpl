@@ -5,39 +5,44 @@
 {{define "content"}}
     {{$res := index .Data "countryRow"}}
 
-    <form method="post">
+    <form method="post" style="width: 75%;>
         <h3>Get Resource Consumption Status of a Country</h3>
         <div class="mb-3 justify-content-center">
             <label for="country" class="form-label">Enter Desired Country:</label>
+            <br>
+            <br>
             <input type="text" class="form-control" id="country" name="country" value="{{if $res}}{{$res.Country}}{{end}}" placeholder="Enter desired country">
         </div>
+        <br>
         <button type="submit" class="btn btn-primary">Enter</button>
         <br>
         <br>
         <label class="text-danger">{{index .CustomErrors "noCountry"}}</label>
 
         {{if $res}}
-        <h3>Usage of Resources by {{$res.Country}}</h3>
-        <table class="table table-striped">
-            <tr>
-                <td>Country</td>
-                <td>Oil</td>
-                <td>Electricity</td>
-                <td>Coal</td>
-                <td>Natural Gas</td>
-                <td>Biofuel</td>
-            </tr>
-            <tr>
-                <td>{{$res.Country}}</td>
-                <td>{{$res.Oil}}</td>
-                <td>{{$res.Electricity}}</td>
-                <td>{{$res.Coal}}</td>
-                <td>{{$res.NaturalGas}}</td>
-                <td>{{$res.Biofuel}}</td>
-            </tr>
-        </table>
+            <h3>Usage of Resources by {{$res.Country}}</h3>
+            <table class="table table-striped">
+                <tr>
+                    <td>Country</td>
+                    <td>Oil <br> (in barrels per day)</td>
+                    <td>Electricity <br> (in billion kwh)</td>
+                    <td>Coal <br> (in 1000 short tons)</td>
+                    <td>Natural Gas <br> (in billions cubic feet)</td>
+                    <td>Biofuel <br> (in barrels per day)</td>
+                </tr>
+                <tr>
+                    <td>{{$res.Country}}</td>
+                    <td>{{$res.Oil}}</td>
+                    <td>{{$res.Electricity}}</td>
+                    <td>{{$res.Coal}}</td>
+                    <td>{{$res.NaturalGas}}</td>
+                    <td>{{$res.Biofuel}}</td>
+                </tr>
+            </table>
 
-        <p>Data from <a href="https://worldpopulationreview.com/">WorldPopulationReview</a></p>
+            <p class="text-warning">*If field is empty, data is insufficient</p>
+
+            <p>Data from <a href="https://worldpopulationreview.com/">WorldPopulationReview</a></p>
     {{end}}
 
     </form>

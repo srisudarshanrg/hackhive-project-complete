@@ -204,6 +204,25 @@ func (a *HandlerAccess) PostForgotPassword(w http.ResponseWriter, r *http.Reques
 		return
 	}
 
+	checkEmailExistQuery := `select * from login_details where email=$1`
+	result, err := db.Exec(checkEmailExistQuery, email)
+	if err != nil {
+		log.Println(err)
+	}
+
+	affected, _ := result.RowsAffected()
+
+	if affected == 0 {
+		errorMap := map[string]string{}
+
+		errorString := "This email address does not have an account here. Would you like to sign up?"
+		errorMap["emailNotFound"] = errorString
+
+		render.RenderTemplate(w, r, "forgot-password.page.tmpl", &models.TemplateData{
+			CustomErrors: errorMap,
+		})
+	}
+
 	// Send email
 	from := "srisudarshanrg@gmail.com"
 	password := confidential.EmailPassword()
@@ -366,8 +385,6 @@ func (a *HandlerAccess) PostResourceStatus(w http.ResponseWriter, r *http.Reques
 		NaturalGas:  natural_gas,
 		Biofuel:     biofuel,
 	}
-
-	// CheckIfEmpty("Data Insufficient", specificCountry.Country, specificCountry.Oil, specificCountry.Electricity, specificCountry.Coal, specificCountry.NaturalGas, specificCountry.Biofuel)
 
 	data := map[string]interface{}{}
 	data["countryRow"] = specificCountry
