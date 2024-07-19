@@ -5,7 +5,8 @@
 {{define "content"}}
     {{$res := index .Data "countryRow"}}
 
-    <form method="post" style="width: 75%;>
+    <form method="post" style="width: 75%;">
+        <input type="hidden" name="csrf_token" value="{{index .CSRFToken}}">
         <h3>Get Resource Consumption Status of a Country</h3>
         <div class="mb-3 justify-content-center">
             <label for="country" class="form-label">Enter Desired Country:</label>

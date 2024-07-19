@@ -18,6 +18,7 @@ func CreateDatabaseConnection() (*sql.DB, error) {
 		log.Fatal("Could not create database")
 		return nil, err
 	}
+	defer db.Close()
 
 	return db, nil
 }
