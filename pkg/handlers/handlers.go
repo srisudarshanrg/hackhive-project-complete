@@ -19,6 +19,7 @@ import (
 var Repo HandlerAccess
 var db *sql.DB
 var otp string
+var loginStatus bool
 
 type HandlerAccess struct {
 	App *config.AppConfig
@@ -42,30 +43,45 @@ func DatabaseAccess(database *sql.DB) {
 
 // Home is the handler for the home page
 func (a *HandlerAccess) Home(w http.ResponseWriter, r *http.Request) {
-	ipAddr := a.App.Session.GetString(r.Context(), "ipAddr")
-
-	if ipAddr == "" {
+	if !loginStatus {
 		http.Redirect(w, r, "/login", http.StatusSeeOther)
 	} else {
-		render.RenderTemplate(w, r, "home.page.tmpl", &models.TemplateData{})
+		loginStatusData := map[string]interface{}{}
+		loginStatusData["loginStatus"] = "Logout"
+		render.RenderTemplate(w, r, "home.page.tmpl", &models.TemplateData{
+			Data: loginStatusData,
+		})
 	}
 }
 
 // CarboPrint is the handler for the carboprint page
 func (a *HandlerAccess) CarboPrint(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, r, "cargoprint.page.tmpl", &models.TemplateData{})
+	if !loginStatus {
+		http.Redirect(w, r, "/login", http.StatusSeeOther)
+	} else {
+		loginStatusData := map[string]interface{}{}
+		loginStatusData["loginStatus"] = "Logout"
+		render.RenderTemplate(w, r, "carboprint.page.tmpl", &models.TemplateData{
+			Data: loginStatusData,
+		})
+	}
 }
 
 // RecycleLocator is the handler for the recycle locator page
 func (a *HandlerAccess) RecycleLocator(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, r, "recycle-locator.page.tmpl", &models.TemplateData{})
+	if !loginStatus {
+		http.Redirect(w, r, "/login", http.StatusSeeOther)
+	} else {
+		loginStatusData := map[string]interface{}{}
+		loginStatusData["loginStatus"] = "Logout"
+		render.RenderTemplate(w, r, "recycle-locator.page.tmpl", &models.TemplateData{
+			Data: loginStatusData,
+		})
+	}
 }
 
 // Login is the handler for login page
 func (a *HandlerAccess) Login(w http.ResponseWriter, r *http.Request) {
-	ipAddr := r.RemoteAddr
-	a.App.Session.Put(r.Context(), "ipAddr", ipAddr)
-
 	render.RenderTemplate(w, r, "login.page.tmpl", &models.TemplateData{
 		CustomErrors: nil,
 	})
@@ -119,6 +135,7 @@ func (a *HandlerAccess) PostLogin(w http.ResponseWriter, r *http.Request) {
 		check := GetPasswordFromHash(password_entered, hashed_password)
 
 		if check {
+			SetLoginStatus(true)
 			http.Redirect(w, r, "/", http.StatusSeeOther)
 		} else {
 			errorString = "Username or Password incorrect"
@@ -173,7 +190,7 @@ func (a *HandlerAccess) PostSignUp(w http.ResponseWriter, r *http.Request) {
 
 		driver.DisplayRows(db)
 
-		http.Redirect(w, r, "/", http.StatusSeeOther)
+		http.Redirect(w, r, "/login", http.StatusSeeOther)
 	} else {
 		errorMap := map[string]string{}
 
@@ -324,10 +341,16 @@ func (a *HandlerAccess) PostResetPassword(w http.ResponseWriter, r *http.Request
 }
 
 func (a *HandlerAccess) ResourceStatus(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, r, "resource-status.page.tmpl", &models.TemplateData{
-		CustomErrors: nil,
-		Data:         nil,
-	})
+	if !loginStatus {
+		http.Redirect(w, r, "/login", http.StatusSeeOther)
+	} else {
+		loginStatusData := map[string]interface{}{}
+		loginStatusData["loginStatus"] = "Logout"
+		render.RenderTemplate(w, r, "resource-status.page.tmpl", &models.TemplateData{
+			CustomErrors: nil,
+			Data:         loginStatusData,
+		})
+	}
 }
 
 func (a *HandlerAccess) PostResourceStatus(w http.ResponseWriter, r *http.Request) {

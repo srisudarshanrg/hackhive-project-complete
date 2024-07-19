@@ -46,3 +46,7 @@ func SendEmail(from string, to []string, message []byte, password string) error 
 func SetOtp(otp_recieved string) {
 	otp = otp_recieved
 }
+
+func SetLoginStatus(loginStatusArg bool) {
+	loginStatus = loginStatusArg
+}

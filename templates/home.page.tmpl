@@ -6,7 +6,7 @@
 
 {{define "js"}} <script src="../static/js/index.js"></script> {{end}}
 
-{{define "logoutNav"}} Logout {{end}}
+{{define "logoutNav"}} <a class="nav-link" href="/login" style="margin-left: 45px;"> {{index .Data "loginStatus"}} </a>{{end}}
 
 {{define "content"}}
     <div class="heading">
