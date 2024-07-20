@@ -38,14 +38,8 @@ func routes(app *config.AppConfig) http.Handler {
 	mux.Get("/resource-status", handlers.Repo.ResourceStatus)
 	mux.Post("/resource-status", handlers.Repo.PostResourceStatus)
 
-	mux.Get("/coal-production", handlers.Repo.CoalProduction)
-	mux.Post("/coal-production", handlers.Repo.PostCoalProduction)
-
-	mux.Get("/oil-production", handlers.Repo.OilProduction)
-	mux.Post("/oil-production", handlers.Repo.PostOilProduction)
-
-	mux.Get("/gas-production", handlers.Repo.GasProduction)
-	mux.Post("/gas-production", handlers.Repo.PostGasProduction)
+	mux.Get("/resource-production", handlers.Repo.ResourceProduction)
+	mux.Post("/resource-production", handlers.Repo.PostResourceProduction)
 
 	fileServer := http.FileServer(http.Dir("./static/"))
 	mux.Handle("/static/*", http.StripPrefix("/static", fileServer))

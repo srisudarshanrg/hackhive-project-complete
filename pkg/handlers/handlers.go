@@ -426,20 +426,20 @@ func (a *HandlerAccess) PostResourceStatus(w http.ResponseWriter, r *http.Reques
 	})
 }
 
-func (a *HandlerAccess) CoalProduction(w http.ResponseWriter, r *http.Request) {
+func (a *HandlerAccess) ResourceProduction(w http.ResponseWriter, r *http.Request) {
 	if !loginStatus {
 		http.Redirect(w, r, "/login", http.StatusSeeOther)
 	} else {
 		loginStatusData := map[string]interface{}{}
 		loginStatusData["loginStatus"] = "Logout"
-		render.RenderTemplate(w, r, "coal-production.page.tmpl", &models.TemplateData{
+		render.RenderTemplate(w, r, "resource-production.page.tmpl", &models.TemplateData{
 			CustomErrors: nil,
 			Data:         loginStatusData,
 		})
 	}
 }
 
-func (a *HandlerAccess) PostCoalProduction(w http.ResponseWriter, r *http.Request) {
+func (a *HandlerAccess) PostResourceProduction(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
 		log.Println(err)
@@ -448,7 +448,9 @@ func (a *HandlerAccess) PostCoalProduction(w http.ResponseWriter, r *http.Reques
 	countryResponse := r.Form.Get("countryCoal")
 	yearResponse := r.Form.Get("yearCoal")
 
-	checkAvailableQuery := `select * from coal_production where country=$1 and year=$2`
+	countryResponse = strings.ToLower(countryResponse)
+
+	checkAvailableQuery := `select * from resource_production where lower(country)=$1 and year=$2`
 	result, err := db.Exec(checkAvailableQuery, countryResponse, yearResponse)
 	if err != nil {
 		log.Println(err)
@@ -460,9 +462,9 @@ func (a *HandlerAccess) PostCoalProduction(w http.ResponseWriter, r *http.Reques
 		errorMap := map[string]string{}
 
 		errorString := "Data not available for this country or year"
-		errorMap["coalCountryNotFound"] = errorString
+		errorMap["countryNotFound"] = errorString
 
-		render.RenderTemplate(w, r, "coal-production.page.tmpl", &models.TemplateData{
+		render.RenderTemplate(w, r, "resource-production.page.tmpl", &models.TemplateData{
 			CustomErrors: errorMap,
 		})
 
@@ -471,191 +473,39 @@ func (a *HandlerAccess) PostCoalProduction(w http.ResponseWriter, r *http.Reques
 
 	row, _ := db.Query(checkAvailableQuery, countryResponse, yearResponse)
 
-	var country, code, year, coal_production string
+	var country, code, year, gas_production, coal_production, oil_production interface{}
 	var created_at, updated_at interface{}
 	var id int
 
 	for row.Next() {
-		err = row.Scan(&id, &country, &code, &year, &coal_production, &created_at, &updated_at)
+		err = row.Scan(&id, &country, &code, &year, &gas_production, &coal_production, &oil_production, &created_at, &updated_at)
 		if err != nil {
 			log.Println(err)
 		}
 	}
 
-	type CoalCountry struct {
-		Country        string
-		Code           string
-		Year           string
-		CoalProduction string
+	type CountryProduction struct {
+		Country        interface{}
+		Code           interface{}
+		Year           interface{}
+		GasProduction  interface{}
+		CoalProduction interface{}
+		OilProduction  interface{}
 	}
 
-	specificCountryCoal := CoalCountry{
+	specificCountryProduction := CountryProduction{
 		Country:        country,
 		Code:           code,
 		Year:           year,
+		GasProduction:  gas_production,
 		CoalProduction: coal_production,
+		OilProduction:  oil_production,
 	}
 
 	data := map[string]interface{}{}
-	data["countryCoalDetail"] = specificCountryCoal
+	data["countryProductionDetail"] = specificCountryProduction
 
-	render.RenderTemplate(w, r, "coal-production.page.tmpl", &models.TemplateData{
-		Data: data,
-	})
-}
-
-func (a *HandlerAccess) OilProduction(w http.ResponseWriter, r *http.Request) {
-	if !loginStatus {
-		http.Redirect(w, r, "/login", http.StatusSeeOther)
-	} else {
-		loginStatusData := map[string]interface{}{}
-		loginStatusData["loginStatus"] = "Logout"
-		render.RenderTemplate(w, r, "oil-production.page.tmpl", &models.TemplateData{
-			CustomErrors: nil,
-			Data:         loginStatusData,
-		})
-	}
-}
-
-func (a *HandlerAccess) PostOilProduction(w http.ResponseWriter, r *http.Request) {
-	err := r.ParseForm()
-	if err != nil {
-		log.Println(err)
-	}
-
-	countryResponse := r.Form.Get("countryCoal")
-	yearResponse := r.Form.Get("yearCoal")
-
-	checkAvailableQuery := `select * from coal_production where country=$1 and year=$2`
-	result, err := db.Exec(checkAvailableQuery, countryResponse, yearResponse)
-	if err != nil {
-		log.Println(err)
-	}
-
-	affected, _ := result.RowsAffected()
-
-	if affected == 0 {
-		errorMap := map[string]string{}
-
-		errorString := "Data not available for this country or year"
-		errorMap["coalCountryNotFound"] = errorString
-
-		render.RenderTemplate(w, r, "coal-production.page.tmpl", &models.TemplateData{
-			CustomErrors: errorMap,
-		})
-
-		return
-	}
-
-	row, _ := db.Query(checkAvailableQuery, countryResponse, yearResponse)
-
-	var country, code, year, coal_production string
-	var created_at, updated_at interface{}
-	var id int
-
-	for row.Next() {
-		err = row.Scan(&id, &country, &code, &year, &coal_production, &created_at, &updated_at)
-		if err != nil {
-			log.Println(err)
-		}
-	}
-
-	type CoalCountry struct {
-		Country        string
-		Code           string
-		Year           string
-		CoalProduction string
-	}
-
-	specificCountryCoal := CoalCountry{
-		Country:        country,
-		Code:           code,
-		Year:           year,
-		CoalProduction: coal_production,
-	}
-
-	data := map[string]interface{}{}
-	data["countryCoalDetail"] = specificCountryCoal
-
-	render.RenderTemplate(w, r, "coal-production.page.tmpl", &models.TemplateData{
-		Data: data,
-	})
-}
-
-func (a *HandlerAccess) GasProduction(w http.ResponseWriter, r *http.Request) {
-	if !loginStatus {
-		http.Redirect(w, r, "/login", http.StatusSeeOther)
-	} else {
-		loginStatusData := map[string]interface{}{}
-		loginStatusData["loginStatus"] = "Logout"
-		render.RenderTemplate(w, r, "gas-production.page.tmpl", &models.TemplateData{
-			CustomErrors: nil,
-			Data:         loginStatusData,
-		})
-	}
-}
-
-func (a *HandlerAccess) PostGasProduction(w http.ResponseWriter, r *http.Request) {
-	err := r.ParseForm()
-	if err != nil {
-		log.Println(err)
-	}
-
-	countryResponse := r.Form.Get("countryCoal")
-	yearResponse := r.Form.Get("yearCoal")
-
-	checkAvailableQuery := `select * from coal_production where country=$1 and year=$2`
-	result, err := db.Exec(checkAvailableQuery, countryResponse, yearResponse)
-	if err != nil {
-		log.Println(err)
-	}
-
-	affected, _ := result.RowsAffected()
-
-	if affected == 0 {
-		errorMap := map[string]string{}
-
-		errorString := "Data not available for this country or year"
-		errorMap["coalCountryNotFound"] = errorString
-
-		render.RenderTemplate(w, r, "coal-production.page.tmpl", &models.TemplateData{
-			CustomErrors: errorMap,
-		})
-
-		return
-	}
-
-	row, _ := db.Query(checkAvailableQuery, countryResponse, yearResponse)
-
-	var country, code, year, coal_production string
-	var created_at, updated_at interface{}
-	var id int
-
-	for row.Next() {
-		err = row.Scan(&id, &country, &code, &year, &coal_production, &created_at, &updated_at)
-		if err != nil {
-			log.Println(err)
-		}
-	}
-
-	type CoalCountry struct {
-		Country        string
-		Code           string
-		Year           string
-		CoalProduction string
-	}
-
-	specificCountryCoal := CoalCountry{
-		Country:        country,
-		Code:           code,
-		Year:           year,
-		CoalProduction: coal_production,
-	}
-
-	data := map[string]interface{}{}
-	data["countryCoalDetail"] = specificCountryCoal
-
-	render.RenderTemplate(w, r, "coal-production.page.tmpl", &models.TemplateData{
+	render.RenderTemplate(w, r, "resource-production.page.tmpl", &models.TemplateData{
 		Data: data,
 	})
 }

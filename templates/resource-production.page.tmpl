@@ -1,14 +1,26 @@
 {{template "standard" .}}
 
-{{define "css"}} <link rel="stylesheet" href="../static/css/resource-status.css"></link> {{end}}
+{{define "title"}} Gloabl Resource Production {{end}}
+
+{{define "css"}} <link rel="stylesheet" href="../static/css/resource-status.css"> {{end}}
+
+<!-- {{define "js"}}
+    <!-- <script src="../static/js/resource-production.js"></script> -->
+
+    <script>
+        let data = [
+            [$res.GasProduction, $res.CoalProduction, $res.OilProduction]
+        ]
+    </script>
+{{end}} -->
 
 {{define "content"}}
-    {{$res := index .Data "countryCoalDetail"}}
+    {{$res := index .Data "countryProductionDetail"}}
 
     <form method="post">
         <input type="hidden" name="csrf_token" value="{{index .CSRFToken}}">
 
-        <h3>Get Coal Production in a Country</h3>
+        <h3>Get Resource Production in a Country</h3>
 
         <br>
         <br>
@@ -20,7 +32,7 @@
             </div>
 
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">                
-                <label for="yearCoal" class="form-label">Enter desired year</label>
+                <label for="yearCoal" class="form-label">Enter desired year from 1965</label>
                 <input type="text" name="yearCoal" class="form-control" placeholder="Enter desired year" value="{{if $res}} {{$res.Year}} {{end}}" required>
             </div>
         </div>
@@ -32,7 +44,7 @@
 
         <br>
         <br>
-        <label class="text-danger">{{index .CustomErrors "coalCountryNotFound"}}</label>
+        <label class="text-danger">{{index .CustomErrors "countryNotFound"}}</label>
 
         {{if $res}}
             <table class="table table-striped table-dark">
@@ -40,18 +52,28 @@
                     <td>Country</td>
                     <td>Code</td>
                     <td>Year</td>
-                    <td>Coal Production (in tWh)</td>
+                    <td>Gas Production (in TWh)</td>
+                    <td>Coal Production (in TWh)</td>
+                    <td>Oil Production (in TWh)</td>
                 </tr>
 
                 <tr>
                     <td>{{$res.Country}}</td>
                     <td>{{$res.Code}}</td>
                     <td>{{$res.Year}}</td>
+                    <td>{{$res.GasProduction}}</td>
                     <td>{{$res.CoalProduction}}</td>
+                    <td>{{$res.OilProduction}}</td>
                 </tr>
             </table>
 
-            <p>Data from <a href="https://ourworldindata.org/grapher/oil-production-by-country">OurWorldInData</a></p>
+            <div class="chart">
+                
+            </div>
+
+            <p class="text-warning">*If field is empty, data is insufficient</p>
+
+            <p>Data from <a href="https://ourworldindata.org/fossil-fuels">OurWorldInData</a></p>
         {{end}}
     </form>
 {{end}}

@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(27, 27, 27);
     color: #fff;
     text-align: center;
 }
@@ -11,4 +11,9 @@ form {
     padding: 2%;
     margin: auto;
     border-radius: 5px;
+}
+
+div.chart {
+    width: 90%;
+    height: 90%;
 }
