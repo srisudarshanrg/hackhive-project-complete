@@ -27,7 +27,19 @@
                         <a class="nav-link" aria-current="page" href="/">Home</a>
                         <a class="nav-link" href="/recycle-locator" style="margin-left: 45px;">Recycling Plant Locator</a>
                         <a class="nav-link" href="/carboprint" style="margin-left: 45px;">CarboPrint</a>
-                        <a class="nav-link" href="/resource-status" style="margin-left: 45px;">Resource Status</a>
+                        <li class="nav-item dropdown" style="margin-left: 45px;">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Resource Status
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/coal-production">Global Coal Production</a></li>    
+                                <li><a class="dropdown-item" href="/oil-production">Global Oil Production</a></li>                                
+                                <li><a class="dropdown-item" href="/gas-production">Global Gas Production</a></li>    
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/resource-status">Overall Status</a></li>
+                            </ul>
+                        </li>
+                        
                         {{block "logoutNav" .}} {{end}}
                     </div>
                 </div>

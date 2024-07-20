@@ -47,6 +47,7 @@ func SetOtp(otp_recieved string) {
 	otp = otp_recieved
 }
 
+// SetLoginStatus sets the login status so that every handler can access it
 func SetLoginStatus(loginStatusArg bool) {
 	loginStatus = loginStatusArg
 }

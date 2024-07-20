@@ -1,0 +1,57 @@
+{{template "standard" .}}
+
+{{define "css"}} <link rel="stylesheet" href="../static/css/resource-status.css"></link> {{end}}
+
+{{define "content"}}
+    {{$res := index .Data "countryCoalDetail"}}
+
+    <form method="post">
+        <input type="hidden" name="csrf_token" value="{{index .CSRFToken}}">
+
+        <h3>Get Coal Production in a Country</h3>
+
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <label for="countryCoal" class="form-label">Enter country</label>
+                <input type="text" name="countryCoal" class="form-control" placeholder="Enter a country" value="{{if $res}} {{$res.Country}} {{end}}" required>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">                
+                <label for="yearCoal" class="form-label">Enter desired year</label>
+                <input type="text" name="yearCoal" class="form-control" placeholder="Enter desired year" value="{{if $res}} {{$res.Year}} {{end}}" required>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <button type="submit" class="btn btn-primary">Get Data</button>
+
+        <br>
+        <br>
+        <label class="text-danger">{{index .CustomErrors "coalCountryNotFound"}}</label>
+
+        {{if $res}}
+            <table class="table table-striped table-dark">
+                <tr>
+                    <td>Country</td>
+                    <td>Code</td>
+                    <td>Year</td>
+                    <td>Coal Production (in tWh)</td>
+                </tr>
+
+                <tr>
+                    <td>{{$res.Country}}</td>
+                    <td>{{$res.Code}}</td>
+                    <td>{{$res.Year}}</td>
+                    <td>{{$res.CoalProduction}}</td>
+                </tr>
+            </table>
+
+            <p>Data from <a href="https://ourworldindata.org/grapher/oil-production-by-country">OurWorldInData</a></p>
+        {{end}}
+    </form>
+{{end}}

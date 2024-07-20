@@ -1,0 +1,7 @@
+create_table("gas_production") {
+    t.Column("id", "integer", {primary: true})
+    t.Column("country", "string")
+    t.Column("code", "string")
+    t.Column("year", "string")
+    t.Column("gas_production", "string")
+}
