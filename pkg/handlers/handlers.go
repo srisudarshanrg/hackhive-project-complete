@@ -48,9 +48,7 @@ func (a *HandlerAccess) Home(w http.ResponseWriter, r *http.Request) {
 	} else {
 		loginStatusData := map[string]interface{}{}
 		loginStatusData["loginStatus"] = "Logout"
-		render.RenderTemplate(w, r, "home.page.tmpl", &models.TemplateData{
-			Data: loginStatusData,
-		})
+		render.RenderTemplate(w, r, "home.page.tmpl", &models.TemplateData{})
 	}
 }
 
@@ -61,9 +59,7 @@ func (a *HandlerAccess) CarboPrint(w http.ResponseWriter, r *http.Request) {
 	} else {
 		loginStatusData := map[string]interface{}{}
 		loginStatusData["loginStatus"] = "Logout"
-		render.RenderTemplate(w, r, "carboprint.page.tmpl", &models.TemplateData{
-			Data: loginStatusData,
-		})
+		render.RenderTemplate(w, r, "carboprint.page.tmpl", &models.TemplateData{})
 	}
 }
 
@@ -74,9 +70,29 @@ func (a *HandlerAccess) RecycleLocator(w http.ResponseWriter, r *http.Request) {
 	} else {
 		loginStatusData := map[string]interface{}{}
 		loginStatusData["loginStatus"] = "Logout"
-		render.RenderTemplate(w, r, "recycle-locator.page.tmpl", &models.TemplateData{
-			Data: loginStatusData,
-		})
+		render.RenderTemplate(w, r, "recycle-locator.page.tmpl", &models.TemplateData{})
+	}
+}
+
+// RecycleLocator is the handler for the recycle locator page
+func (a *HandlerAccess) RecycleLocatorInput(w http.ResponseWriter, r *http.Request) {
+	if !loginStatus {
+		http.Redirect(w, r, "/login", http.StatusSeeOther)
+	} else {
+		loginStatusData := map[string]interface{}{}
+		loginStatusData["loginStatus"] = "Logout"
+		render.RenderTemplate(w, r, "recycle-location-input.page.tmpl", &models.TemplateData{})
+	}
+}
+
+// RecycleLocator is the handler for the recycle locator page
+func (a *HandlerAccess) HomeRecycling(w http.ResponseWriter, r *http.Request) {
+	if !loginStatus {
+		http.Redirect(w, r, "/login", http.StatusSeeOther)
+	} else {
+		loginStatusData := map[string]interface{}{}
+		loginStatusData["loginStatus"] = "Logout"
+		render.RenderTemplate(w, r, "home-recycling.page.tmpl", &models.TemplateData{})
 	}
 }
 

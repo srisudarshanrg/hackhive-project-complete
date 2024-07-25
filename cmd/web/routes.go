@@ -23,6 +23,10 @@ func routes(app *config.AppConfig) http.Handler {
 
 	mux.Get("/recycle-locator", handlers.Repo.RecycleLocator)
 
+	mux.Get("/recycle-location-input", handlers.Repo.RecycleLocatorInput)
+
+	mux.Get("/home-recycling", handlers.Repo.HomeRecycling)
+
 	mux.Get("/sign-up", handlers.Repo.SignUp)
 	mux.Post("/sign-up", handlers.Repo.PostSignUp)
 

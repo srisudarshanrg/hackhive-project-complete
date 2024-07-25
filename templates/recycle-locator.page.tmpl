@@ -1,48 +1,57 @@
 {{template "standard" .}}
 
-{{define "css"}}
-        <link href="https://fonts.googleapis.com/css2?family=Single+Day&display=swap" >
-        <link rel="stylesheet" href="../static/css/recycle-locator.css">
-{{end}}
+{{define "title"}} Recycle Locator {{end}}
 
-{{define "title"}}Recycle Locator{{end}}
+{{define "css"}} <link rel="stylesheet" href="../static/css/recycle-locator-css.css"> {{end}}
 
-{{define "content"}} 
+{{define "content"}}
+
+<div class="content">
+    
+
     <div class="top">
-        <h1 class="title">Recycle locater</h1>
-    </div>
 
-    <br><br><br>
+        <h1 class="title">Recycle locator</h1>
+
+    </div>
+    
+<div class="everything">
+
+
+    <br><br><br><br><br><br>
 
 
     <div class="mid">
 
-        <h2 class="heading">Finding a nearby recycling Facility</h2>
+        <p class="heading">Finding a nearby recycling Facility?</p>
 
-        <h4 class="subheading">Enter your location to find out what you can recycle in our local area</h4>
+        <h4 class="subheading">Click on get started to find out where you can recycle in our local area.</h4>
         
 
-        <br><br><br><br><br><br>
+        <br><br><br><br><br>
 
-        <div class="Enter_location">
+        <a href="/recycle-location-input">
+        <button class="transferbutton"> Get started ➡</button>
+        </a>
 
-        <form action="https://www.google.com/maps" method="get" target="_blank">
-        <label for="location">Where are you?</label>
-        <input type="text" id="location" name="q" placeholder="Enter location here" required>
-        <input type="hidden" name="q" value="recycling centers">
-        <button type="submit">Search for recycling centers</button>
+        <a href="">
+            <button class="transferbutton2">Back to home ➡</button>
+        </a>
 
-        </form>
-      
-        </div>
-        
+        <a href="/home-recycling">
+            <button class="transferbutton3">CLick to know more ➡</button>
+        </a>
+
     </div>
 
-    <video autoplay muted loop id="../static/images/background-video.mp4">
-        <source src="../static/images/background-video.mp4" type="video/mp4">
-    </video>
+    </div>
+
+
+
+    <video autoplay muted loop id="../static/images/recycle-locator-bg-video.mp4">
+        <source src="../static/images/recycle-locator-bg-video.mp4" type="video/mp4">
+      </video>
+
+</div>
             
 {{end}}
-
-{{define "js"}}<script></script>{{end}}
-

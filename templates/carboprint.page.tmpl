@@ -4,16 +4,18 @@
 
 {{define "css"}} <link rel="stylesheet" href="../static/css/carboprint.css"> {{end}}
 
+{{define "js"}} <script src="../static/js/carboprint.js"></script> {{end}}
+
 {{define "content"}}
     <div class="top">
-        <img class="image" src="../static/images/" alt="EcoEarth Image" width="60px" height="60px">
+        <img class="image" src="../static/images/eco-earth-image.svg" alt="EcoEarthImage" width="60px" height="60px">
         <h1 class="title">CarboPrint</h1>
     </div>
     <div class="mid">
         <br>
         <br>
         <div id="carouselExampleIndicators" class="carousel slide">
-          <div class="carousel-indicators" style="width: 5px;">
+          <div class="carousel-indicators" style="z-index: -1000;">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
@@ -52,8 +54,8 @@
               <div class="carousel-item">
                 <!-- Third Question-->
                 <label for="foodType">Choose one of the foodTypes from the drop-down</label>
-                <input id="foodType" list="foodTypes">
-                <datalist id="foodTypes" name="foodTypes">
+                <input id="foodType" list="foodTypes" name="foodType">
+                <datalist id="foodTypes">
                   <option value="Vegetarian">
                   <option value="Lacto-Vegetarian">
                   <option value="Non-Vegetarian">
@@ -166,11 +168,9 @@
       <br>
 
      </div>  
-    {{/* <video id="background-video" autoplay loop muted poster="../static/images/background-video.mp4">
-        <source src="../static/images/background-video.mp4" type="video/mp4">
-    </video> */}}
+    <video id="background-video" autoplay loop muted poster="../static/images/carboprint-bg-video.mp4">
+        <source src="../static/images/carboprint-bg-video.mp4" type="video/mp4">
+    </video>
 {{end}}
-  
-{{define "js"}} <script src="../static/js/carboprint.js"></script> {{end}}
-
-  
+</body>
+</html>
