@@ -2,7 +2,7 @@
 
 {{define "title"}} Recycle Locator {{end}}
 
-{{define "css"}} <link rel="stylesheet" href="../static/css/recycle-locator-css.css"> {{end}}
+{{define "css"}} <link rel="stylesheet" href="../static/css/recycle-locator.css.css"> {{end}}
 
 {{define "content"}}
 <div class="content">
@@ -23,7 +23,7 @@
 
     <form action="https://www.google.com/maps" method="get" target="_blank">
     <label for="location">Where are you?</label>
-    <input class="textbox" type="text" id="location" name="q" placeholder="Enter location here" required style="font-size: 1rem;">
+    <input class="textbox" type="text" id="location" name="q" placeholder="Enter location here" required style="font-size: 1rem;" value="recycling centres ">
     <input type="hidden" name="q" value="recycling centers">
     <button class="submit" type="submit">Search for recycling centers</button>
 

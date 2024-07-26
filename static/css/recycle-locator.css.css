@@ -1,19 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+
 .title {
     display: inline;
     margin-top: 0px;
     padding-top: 0px;
-    background-color: #000000;
     font-family: 'Black Ops One';
     background-clip: text;
-    font-size: 40px;
+    font-size: 4rem;
     text-align: center;
+    font-family: "Black Ops One", sans-serif;
 }
 .top {
     margin-left: 10px;
     width: 97%;
     padding: 10px;
     text-align: center;
-    background-color: black;
     color: white;
 }
 
@@ -26,13 +27,6 @@
     font-size: 20px;
     text-align: left;
     
-}
-
-    
-body {
-    margin: 0px 0px 0px 0px;
-    background-color: #000000;
-
 }
 
 
