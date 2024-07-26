@@ -2,7 +2,7 @@
 
 {{define "title"}} Global Resource Production {{end}}
 
-{{define "css"}} <link rel="stylesheet" href="../static/css/resource-status.css"> {{end}}
+{{define "css"}} <link rel="stylesheet" href="../static/css/resource-status.css.css"> {{end}}
 
 {{define "content"}}
     {{$res := index .Data "countryProductionDetail"}}
@@ -22,7 +22,7 @@
             </div>
 
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">                
-                <label for="yearCoal" class="form-label">Enter desired year from 1965</label>
+                <label for="yearCoal" class="form-label">Enter desired year</label>
                 <input type="text" name="yearCoal" class="form-control" placeholder="Enter desired year" value="{{if $res}} {{$res.Year}} {{end}}" required>
             </div>
         </div>

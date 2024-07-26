@@ -2,6 +2,9 @@ body {
     background-color: rgb(27, 27, 27);
     color: #fff;
     text-align: center;
+    background-image: url("https://static.toiimg.com/photo/64587504.cms");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 form {
@@ -11,6 +14,13 @@ form {
     padding: 2%;
     margin: auto;
     border-radius: 5px;
+    background-color: rgb(32, 32, 32);
+    opacity: 80%;
+}
+
+form:hover {
+    opacity: 90%;
+    transition: 0.3s;
 }
 
 div.chart {
