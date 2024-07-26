@@ -2,7 +2,7 @@
 
 {{define "title"}} CarboPrint {{end}}
 
-{{define "css"}} <link rel="stylesheet" href="../static/css/carboprint.css"> {{end}}
+{{define "css"}} <link rel="stylesheet" href="../static/css/new-carboprint.css"> {{end}}
 
 {{define "js"}} <script src="../static/js/carboprint.js"></script> {{end}}
 
@@ -67,30 +67,34 @@
                 <!-- Fourth Question -->
                 <label for="meatType">Choose multiple meat you eat from the list divided by a space <!-- Leave empty as ur veg --></label>
                 <input id="meatType" name="meatType">
+                <br>
+                <br> 
                 <ul style="list-style-type: none;">
-                  <li>Beef</li>
-                  <li>Lamb</li>
-                  <li>Bacon</li>
-                  <li>Pork</li>
-                  <li>Turkey</li>
-                  <li>Duck</li>
-                  <li>Seafood</li>
+                  <li class="carboprint-li">Beef</li>
+                  <li class="carboprint-li">Lamb</li>
+                  <li class="carboprint-li">Bacon</li>
+                  <li class="carboprint-li">Pork</li>
+                  <li class="carboprint-li">Turkey</li>
+                  <li class="carboprint-li">Duck</li>
+                  <li class="carboprint-li">Seafood</li>
                 </ul>
 
               </div>
               <div class="carousel-item">
                 <label for="clothType">What type of cloth do you mostly use? Choose One from the list</label>
                 <input type="text" name="clothType" id="clothType">
+                <br>
+                <br>
                 <ul>
-                  <li>Silk</li>
-                  <li>Satin</li>
-                  <li>Georgette</li>
-                  <li>Nylon</li>
-                  <li>Wool</li>
-                  <li>Rayon</li>
-                  <li>Denim</li>
-                  <li>Jersey</li>
-                  <li>Cotton</li>
+                  <li class="carboprint-li">Silk</li>
+                  <li class="carboprint-li">Satin</li>
+                  <li class="carboprint-li">Georgette</li>
+                  <li class="carboprint-li">Nylon</li>
+                  <li class="carboprint-li">Wool</li>
+                  <li class="carboprint-li">Rayon</li>
+                  <li class="carboprint-li">Denim</li>
+                  <li class="carboprint-li">Jersey</li>
+                  <li class="carboprint-li">Cotton</li>
                 </ul>
               </div>
               <div class="carousel-item">
@@ -100,10 +104,12 @@
               <div class="carousel-item">
                 <label for="buildingType">What type of building you live in?Choose one from list</label>
                 <input type="text" name="buildingType" id="buildingType">
+                <br>
+                <br>
                 <ul>
-                  <li>High-Rise</li>
-                  <li>Independent</li>
-                  <li>Low-Rise</li>
+                  <li class="carboprint-li">High-Rise</li>
+                  <li class="carboprint-li">Independent</li>
+                  <li class="carboprint-li">Low-Rise</li>
                 </ul>
               </div>
               <div class="carousel-item">
@@ -113,11 +119,13 @@
               <div class="carousel-item">
                 <label for="transportType">What type of transport do you use?Type one from the list</label>
                 <input type="text" name="transportType" id="transportType">
+                <br>
+                <br>
                 <ul>
-                  <li>Bus</li>
-                  <li>Bike</li>
-                  <li>Car</li>
-                  <li>Train</li>
+                  <li class="carboprint-li">Bus</li>
+                  <li class="carboprint-li">Bike</li>
+                  <li class="carboprint-li">Car</li>
+                  <li class="carboprint-li">Train</li>
                 </ul>
               </div>
               <div class="carousel-item">
@@ -154,11 +162,11 @@
               </form> 
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="carousel-control-prev-icon prev" aria-hidden="true"></span>
               <span class="visually-hidden">Previous</span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="carousel-control-next-icon next" aria-hidden="true"></span>
               <span class="visually-hidden">Next</span>
             </button>
           </div>
