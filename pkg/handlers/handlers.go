@@ -399,7 +399,7 @@ func (a *HandlerAccess) PostResourceStatus(w http.ResponseWriter, r *http.Reques
 		return
 	}
 
-	var country, oil, electricity, coal, natural_gas, biofuel string
+	var country, oil, electricity, coal, natural_gas, biofuel interface{}
 	var created_at, updated_at interface{}
 	var id int
 
@@ -417,12 +417,12 @@ func (a *HandlerAccess) PostResourceStatus(w http.ResponseWriter, r *http.Reques
 	}
 
 	type CountryDetailOverall struct {
-		Country     string
-		Oil         string
-		Electricity string
-		Coal        string
-		NaturalGas  string
-		Biofuel     string
+		Country     interface{}
+		Oil         interface{}
+		Electricity interface{}
+		Coal        interface{}
+		NaturalGas  interface{}
+		Biofuel     interface{}
 	}
 
 	specificCountryOverall := CountryDetailOverall{
